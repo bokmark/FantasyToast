@@ -20,3 +20,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/local.properties
+.gradle/
+.idea/
+FantasyToast.iml
+app/app.iml
+build/
+fantasy_toast/fantasy_toast.iml
+fantasy_toast/gradle/wrapper/gradle-wrapper.properties
