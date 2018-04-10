@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.bokmark.logger.MyLogger;
 import cn.bokmark.logger.ToastLogger;
 import cn.bokmark.view_pool.MyViewPool;
 import cn.bokmark.view_pool.OutOfSizeException;
@@ -39,7 +40,6 @@ public class FantasyToast {
 
     private Context appContext;
     private Toast toast;
-    private WindowManager mWM;
 
     private ToastLogger logger;
     private ViewPool viewPool;
@@ -50,16 +50,25 @@ public class FantasyToast {
         }
         appContext = context.getApplicationContext();
         this.viewPool.init(appContext, 10);
+        this.logger = new MyLogger();
 
     }
 
+    /**
+     * 设置为null 将不输出log
+     * @param logger
+     */
     public void setLogger(ToastLogger logger) {
         this.logger = logger;
     }
 
+
+    public void configLogger(String TAG) {
+        this.logger.setTag(TAG);
+    }
+
     public void destroy() {
         appContext = null;
-        mWM = null;
         toast = null;
     }
 
@@ -188,6 +197,9 @@ public class FantasyToast {
     }
     @SuppressLint("ShowToast")
     private Toast makeToast(int level, String string) {
+        if (logger != null) {
+            logger.print(level, string);
+        }
 
         if (toast != null) {
             toast.cancel();

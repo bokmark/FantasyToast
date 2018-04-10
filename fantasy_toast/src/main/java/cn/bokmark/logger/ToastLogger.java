@@ -2,11 +2,6 @@ package cn.bokmark.logger;
 
 /**
  * Created by mashuqian on 2018/3/4.
- * 输出的的内容将会以
- * =======================================
- * = [TAG] : [this is message]
- * =======================================
- * 的形式出现在设置的地方，默认出现的地方是出现在顶部
  */
 public interface ToastLogger {
 
