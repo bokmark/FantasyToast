@@ -9,8 +9,8 @@ import cn.bokmark.fantasy_toast.R;
 
 /**
  * Created by mashuqian on 2018/4/10.
+ * SingleViewPool
  */
-
 public class SingleViewPool implements ViewPool {
 
 

@@ -1,12 +1,10 @@
 package cn.bokmark.view_pool;
 
 import android.content.Context;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -14,12 +12,12 @@ import cn.bokmark.fantasy_toast.R;
 
 /**
  * Created by mashuqian on 2018/4/9.
+ * MyViewPool
  */
-
 public class MyViewPool implements ViewPool {
-    LayoutInflater layoutInflater;
-    WindowManager mWM;
-    Queue<View> queue;
+    private LayoutInflater layoutInflater;
+    private WindowManager mWM;
+    private Queue<View> queue;
 
 
     @Override

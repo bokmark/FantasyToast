@@ -17,7 +17,6 @@ class SampleActivity : AppCompatActivity() {
         btn_fail.setOnClickListener { FantasyToast.getInstance().fail("btn_fail") }
         btn_error.setOnClickListener { FantasyToast.getInstance().error("btn_error") }
         btn_info.setOnClickListener { FantasyToast.getInstance().info("btn_info") }
-        //btn_many.setOnClickListener { FantasyToast.getInstance().many("btn_many") }
 
     }
 

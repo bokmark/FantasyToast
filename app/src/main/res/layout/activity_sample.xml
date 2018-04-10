@@ -32,11 +32,6 @@
         android:id="@+id/btn_info"
         android:text="info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" /><!--
-    <Button
-        android:id="@+id/btn_many"
-        android:text="many"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
