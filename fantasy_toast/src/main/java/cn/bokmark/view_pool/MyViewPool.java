@@ -32,10 +32,9 @@ public class MyViewPool implements ViewPool {
     }
 
 
-
     @Override
     public View get() {
-        View view  = queue.poll();
+        View view = queue.poll();
         if (view == null) {
             return createView();
         }

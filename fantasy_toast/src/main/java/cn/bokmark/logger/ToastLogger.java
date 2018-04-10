@@ -48,18 +48,18 @@ public interface ToastLogger {
      *              LEVEL_INFO = 2;
      *              LEVEL_SUCCESS = 3;
      *              LEVEL_FAIL = 4;
-     * @param msg 需要展示的内容
+     * @param msg   需要展示的内容
      */
     void print(int level, String msg);
 
     /**
      * 设置toast的tag
+     *
      * @param tag
      */
     void setTag(String tag);
 
     /**
-     *
      * gravity 设置debug信息出现在顶部还是出现在底部
      *
      * @param gravity Gravity.TOP Gravity.BOTTOM

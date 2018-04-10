@@ -2,9 +2,6 @@ package cn.bokmark.logger;
 
 import android.util.Log;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import static android.util.Log.DEBUG;
 import static android.util.Log.ERROR;
 import static android.util.Log.INFO;

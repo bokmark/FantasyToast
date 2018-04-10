@@ -2,20 +2,13 @@ package cn.bokmark.fantasy_toast;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.PixelFormat;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.bokmark.logger.MyLogger;
 import cn.bokmark.logger.ToastLogger;
-import cn.bokmark.view_pool.MyViewPool;
-import cn.bokmark.view_pool.OutOfSizeException;
 import cn.bokmark.view_pool.SingleViewPool;
 import cn.bokmark.view_pool.ViewPool;
 

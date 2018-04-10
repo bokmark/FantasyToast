@@ -13,8 +13,7 @@ public interface ViewPool {
      * 初始化
      *
      * @param appCtx 传入application context
-     * @param size pool的大小
-     *
+     * @param size   pool的大小
      */
     void init(Context appCtx, int size);
 
