@@ -2,6 +2,10 @@ package cn.bokmark.fantasy_toast;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +34,45 @@ public class FantasyToast {
         return FantasyToastInstance.fantasyToast;
     }
 
+    private FTH fth;
+
+
+    private class FTH extends Handler {
+
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == MSG_SHOW) {
+
+                String string = msg.getData().getString("string");
+                int level = msg.getData().getInt("level");
+                if (TextUtils.isEmpty(string) || level == 0) {
+                    return;
+                }
+
+                if (toast != null) {
+                    toast.cancel();
+                }
+                if (toast!= null && toast.getView() != null) {
+                    viewPool.recycle(toast.getView());
+                }
+                toast = new Toast(appContext);
+                View view = viewPool.get();
+                TextView messageTv = (TextView) view.findViewById(R.id.toast_message);
+                messageTv.setText(string);
+                messageTv.setTextColor(appContext.getResources().getColor(getLevelColor(level)));
+                ImageView imageView = (ImageView) view.findViewById(R.id.iv_tip);
+                imageView.setImageResource(getLevelDrawable(level));
+                toast.setView(view);
+                toast.show();
+            }
+
+        }
+    }
+
+    private static final int MSG_SHOW = 1231;
+    private static final int MSG_HIDE = 1232;
+
 
     private Context appContext;
     private Toast toast;
@@ -44,6 +87,7 @@ public class FantasyToast {
         appContext = context.getApplicationContext();
         this.viewPool.init(appContext, 10);
         this.logger = new MyLogger();
+        fth = new FTH();
 
     }
 
@@ -57,10 +101,17 @@ public class FantasyToast {
 
 
     public void configLogger(String TAG) {
-        this.logger.setTag(TAG);
+        if (this.logger != null) {
+            this.logger.setTag(TAG);
+        }
     }
 
     public void destroy() {
+        if (fth != null) {
+            fth.removeMessages(MSG_SHOW);
+            fth.removeMessages(MSG_HIDE);
+            fth = null;
+        }
         appContext = null;
         toast = null;
     }
@@ -72,7 +123,7 @@ public class FantasyToast {
     }
 
 
-    public static final int LEVEL_DEFAULT = 0;
+    public static final int LEVEL_DEFAULT = -1;
     public static final int LEVEL_ERROR = 1;
     public static final int LEVEL_INFO = 2;
     public static final int LEVEL_SUCCESS = 3;
@@ -118,7 +169,7 @@ public class FantasyToast {
      */
     public void show(String string) {
         checkContext();
-        makeToast(LEVEL_DEFAULT, string).show();
+        makeToast(LEVEL_DEFAULT, string);
     }
 
     /**
@@ -126,7 +177,7 @@ public class FantasyToast {
      */
     public void show(int stringRes) {
         checkContext();
-        makeToast(LEVEL_DEFAULT, appContext.getString(stringRes)).show();
+        makeToast(LEVEL_DEFAULT, appContext.getString(stringRes));
     }
 
 
@@ -135,7 +186,7 @@ public class FantasyToast {
      */
     public void success(String string) {
         checkContext();
-        makeToast(LEVEL_SUCCESS, string).show();
+        makeToast(LEVEL_SUCCESS, string);
     }
 
     /**
@@ -143,7 +194,7 @@ public class FantasyToast {
      */
     public void success(int stringRes) {
         checkContext();
-        makeToast(LEVEL_SUCCESS, appContext.getString(stringRes)).show();
+        makeToast(LEVEL_SUCCESS, appContext.getString(stringRes));
     }
 
 
@@ -152,7 +203,7 @@ public class FantasyToast {
      */
     public void error(String string) {
         checkContext();
-        makeToast(LEVEL_ERROR, string).show();
+        makeToast(LEVEL_ERROR, string);
     }
 
     /**
@@ -160,7 +211,7 @@ public class FantasyToast {
      */
     public void error(int stringRes) {
         checkContext();
-        makeToast(LEVEL_ERROR, appContext.getString(stringRes)).show();
+        makeToast(LEVEL_ERROR, appContext.getString(stringRes));
     }
 
 
@@ -169,7 +220,7 @@ public class FantasyToast {
      */
     public void info(String string) {
         checkContext();
-        makeToast(LEVEL_INFO, string).show();
+        makeToast(LEVEL_INFO, string);
     }
 
     /**
@@ -177,7 +228,7 @@ public class FantasyToast {
      */
     public void fail(String string) {
         checkContext();
-        makeToast(LEVEL_FAIL, string).show();
+        makeToast(LEVEL_FAIL, string);
     }
 
 
@@ -186,26 +237,20 @@ public class FantasyToast {
      */
     public void fail(int stringRes) {
         checkContext();
-        makeToast(LEVEL_FAIL, appContext.getString(stringRes)).show();
+        makeToast(LEVEL_FAIL, appContext.getString(stringRes));
     }
     @SuppressLint("ShowToast")
-    private Toast makeToast(int level, String string) {
+    private void makeToast(int level, String string) {
         if (logger != null) {
             logger.print(level, string);
         }
-
-        if (toast != null) {
-            toast.cancel();
-        }
-        toast = new Toast(appContext);
-        View view = viewPool.get();
-        TextView messageTv = (TextView) view.findViewById(R.id.toast_message);
-        messageTv.setText(string);
-        messageTv.setTextColor(appContext.getResources().getColor(getLevelColor(level)));
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv_tip);
-        imageView.setImageResource(getLevelDrawable(level));
-        toast.setView(view);
-        return toast;
+        Message message = new Message();
+        message.what = MSG_SHOW;
+        Bundle bundle = new Bundle();
+        bundle.putString("string", string);
+        bundle.putInt("level", level);
+        message.setData(bundle);
+        fth.sendMessage(message);
     }
 
 }
