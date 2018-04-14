@@ -1,4 +1,4 @@
-package cn.bokmark.logger;
+package cn.bokmark.fantasy_toast.logger;
 
 import android.util.Log;
 

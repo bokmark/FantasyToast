@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.bokmark.logger.MyLogger;
-import cn.bokmark.logger.ToastLogger;
-import cn.bokmark.view_pool.SingleViewPool;
-import cn.bokmark.view_pool.ViewPool;
+import cn.bokmark.fantasy_toast.logger.MyLogger;
+import cn.bokmark.fantasy_toast.logger.ToastLogger;
+import cn.bokmark.fantasy_toast.view_pool.SingleViewPool;
+import cn.bokmark.fantasy_toast.view_pool.ViewPool;
 
 /**
  * Created by mashuqian on 2018/4/2.

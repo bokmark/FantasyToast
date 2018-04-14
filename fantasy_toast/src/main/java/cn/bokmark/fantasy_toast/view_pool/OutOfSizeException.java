@@ -1,4 +1,4 @@
-package cn.bokmark.view_pool;
+package cn.bokmark.fantasy_toast.view_pool;
 
 /**
  * Created by mashuqian on 2018/4/9.

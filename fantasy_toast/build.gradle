@@ -1,15 +1,28 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.8.1'
+    }
+}
 android {
     compileSdkVersion 19
 
+    lintOptions {
+        abortOnError false
+    }
 
 
+    resourcePrefix "fantasy_toast__"    //这个随便填
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
     }
 
@@ -25,4 +38,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    testCompile 'junit:junit:4.12'
+}
+
+//添加
+publish {
+    userOrg = 'bokmark'//bintray.com用户名
+    groupId = 'cn.bokmark.fantasy_toast'//jcenter上的路径
+    artifactId = 'FantasyToast'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'A Fantast Toast'//描述，不重要
+    website = 'https://github.com/bokmark/FantasyToast'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

@@ -1,4 +1,4 @@
-package cn.bokmark.view_pool;
+package cn.bokmark.fantasy_toast.view_pool;
 
 import android.content.Context;
 import android.view.View;

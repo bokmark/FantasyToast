@@ -1,4 +1,4 @@
-package cn.bokmark.logger;
+package cn.bokmark.fantasy_toast.logger;
 
 /**
  * Created by mashuqian on 2018/3/4.
